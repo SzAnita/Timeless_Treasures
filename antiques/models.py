@@ -10,9 +10,11 @@ class User(models.Model):
     password = models.CharField(max_length=20)
 
 
-
-class Product(models.Model):
+class Antiques(models.Model):
     index = models.IntegerField(primary_key=True, unique=True)
-    name = models.CharField(max_length=255)
-    price = models.FloatField
+    type = models.CharField(max_length=255)
+    year = models.IntegerField
+    description = models.CharField(max_length=255)
+    valuation = models.FloatField(max_length=12)
+
 
