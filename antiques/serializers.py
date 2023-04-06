@@ -1,7 +1,18 @@
 from rest_framework import serializers
-from .models import Antiques, User
+from .models import *
 
 class AntiquesSerializer(serializers.ModelSerializer):
     class Meta:
-        model1 = Antiques
-        fields = ('id', 'type', 'year', 'description', 'valuation', 'fun_facts')
+        model = Antiques
+        fields = ('id', 'type', 'year', 'description', 'link', 'valuation', 'fun_facts')
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ('id', 'first_name', 'last_name', 'email', 'username', 'password')
+
+class FavoritesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Favorites
+        fields = ('id', 'user_id', 'email', 'antique_id', 'type', 'year', 'description', 'link', 'valuation', 'fun_facts')
