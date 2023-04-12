@@ -1,4 +1,7 @@
+import json
 from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.template import loader
 from rest_framework import viewsets
 from .serializers import *
 from .models import *
@@ -15,3 +18,12 @@ class UserView(viewsets.ModelViewSet):
 class FavoritesView(viewsets.ModelViewSet):
     serializer_class = FavoritesSerializer
     queryset = Favorites.objects.all()
+
+def index(request):
+    template = loader.get_template('index.html')
+    return HttpResponse(template.render(), request)
+
+def login(request):
+    template = loader.get_template('login.html')
+    return HttpResponse(template.render())
+

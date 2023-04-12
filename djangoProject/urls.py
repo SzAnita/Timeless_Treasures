@@ -20,8 +20,12 @@ from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'antiques', views.AntiquesView)
+router.register(r'users', views.UserView)
+router.register(r'favorites', views.FavoritesView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(router.urls))
+    path('api/', include(router.urls)),
+    path('antiques/', include('antiques.urls'))
+
 ]
