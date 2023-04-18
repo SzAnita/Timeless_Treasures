@@ -13,7 +13,7 @@ class User(models.Model):
 class Antiques(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
     type = models.CharField(max_length=100)
-    year = models.IntegerField
+    year = models.CharField(max_length=50, null=True)
     description = models.CharField(max_length=255)
     link = models.CharField(max_length=255, null=True)
     valuation = models.FloatField(max_length=12)

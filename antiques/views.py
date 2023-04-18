@@ -21,7 +21,7 @@ class FavoritesView(viewsets.ModelViewSet):
 
 def index(request):
     template = loader.get_template('index.html')
-    return HttpResponse(template.render(), request)
+    return HttpResponse(template.render())
 
 def login(request):
     template = loader.get_template('login.html')
