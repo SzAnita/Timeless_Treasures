@@ -12,11 +12,13 @@ class User(models.Model):
 
 class Antiques(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
-    type = models.CharField(max_length=100)
-    year = models.CharField(max_length=50, null=True)
+    name = models.CharField(max_length=255)
+    type = models.CharField(max_length=50)
+    year = models.CharField(max_length=100)
     description = models.CharField(max_length=255)
-    link = models.CharField(max_length=255, null=True)
-    valuation = models.FloatField(max_length=12)
+    creator = models.CharField(max_length=150)
+    link = models.CharField(max_length=255)
+    valuation = models.CharField(max_length=255, null=True)
     fun_facts = models.CharField(max_length=255, null=True)
 
 class Favorites(models.Model):

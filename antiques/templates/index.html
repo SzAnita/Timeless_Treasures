@@ -4,10 +4,12 @@
   <head>
     <meta charset="UTF-8">
     <title>Timeless Treasures</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="{%  static 'index.js' %}"></script>
   </head>
   <body>
     <div class="main_body">
-      <div class="header">
+      <div class="header" style="background-image: url({% static 'images/header_image.jpg' %})">
         <h1>Timeless Treasures</h1>
         <div class="navbar">
           <div class="menu">
@@ -22,16 +24,14 @@
         </div>
       </div>
       <div class="container">
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>4</div>
-        <div>5</div>
-        <div>6</div>
-        <div>7</div>
-        <div>8</div>
+      <div class="antiques">
+        {% for x in antiques %}
+        <span><img src="{{x.link}}" alt="{{ x.name }}"></span>
+        {% endfor %}
+      </div>
       </div>
     </div>
   </body>
   <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
 </html>
+

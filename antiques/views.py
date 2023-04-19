@@ -3,13 +3,14 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from rest_framework import viewsets
+from rest_framework.response import Response
 from .serializers import *
 from .models import *
 
 class AntiquesView(viewsets.ModelViewSet):
 
-	serializer_class = AntiquesSerializer
-	queryset = Antiques.objects.all()
+    queryset = Antiques.objects.all()
+    serializer_class = AntiquesSerializer
 
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
@@ -20,8 +21,15 @@ class FavoritesView(viewsets.ModelViewSet):
     queryset = Favorites.objects.all()
 
 def index(request):
+    context = {
+        'antiques': Antiques.objects.all().values()
+    }
     template = loader.get_template('index.html')
-    return HttpResponse(template.render())
+    return HttpResponse(template.render(context, request))
+
+def get_antiques(request):
+
+    return Antiques.objects.all().values()
 
 def login(request):
     template = loader.get_template('login.html')
