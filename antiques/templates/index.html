@@ -2,12 +2,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Timeless Treasures</title>
   </head>
   <body>
     <div class="main_body">
-      <div class="header" style="background-image: url({% static 'images/header_image.jpg' %})">
+      <div class="header">
         <h1>Timeless Treasures</h1>
         <div class="navbar">
           <div class="menu">
@@ -22,14 +22,20 @@
         </div>
       </div>
       <div class="container">
-      <div class="antiques">
-        {% for x in antiques %}
-        <span><img src="{{x.link}}" alt="{{ x.name }}"></span>
-        {% endfor %}
-      </div>
+        <div class="antiques">
+          {% for x in antiques %}
+          <div class="img_container">
+            <img src="{{x.link}}" alt="{{ x.name }}" />
+            <div class="hover_div">
+              <Text class="img_info"
+                >Include detailes about certain image here</Text
+              >
+            </div>
+          </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </body>
-  <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}" />
 </html>
-
