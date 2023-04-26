@@ -10,7 +10,7 @@ class AntiquesSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'first_name', 'last_name', 'email', 'username', 'password')
+        fields = ('id', 'first_name', 'last_name', 'email', 'username', 'pwd')
 
 class FavoritesSerializer(serializers.ModelSerializer):
     class Meta:

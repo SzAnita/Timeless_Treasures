@@ -3,30 +3,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Log In</title>
+    <title>Sign up</title>
     <link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="{% static 'login.js' %}"></script>
 </head>
 <body>
-    <div class="main_body">
+     <div class="main_body">
       <a href="index"><div class="header">
         <h1>Timeless Treasures</h1>
       </div>
       </a>
       <div class="container">
-        <form action="login" method="POST">
+        <form action="add_user" method="post" onsubmit="check_pwd()">
             {% csrf_token %}
             {% for field in form %}
                 {{ field.label_tag }}<br>
                 {{ field }}<br>
             {% endfor %}
-            {% if valid == 'no' %}
-                <p class="invalid">Please check your details again</p>
-            {% endif %}
-            <Text>Forgot your password?<br></Text>
             <input type="submit" value="Submit"><br>
-            <p>Don't have an account yet? <a href="signup">Sign up!</a></p>
         </form>
       </div>
-    </div>
+     </div>
 </body>
 </html>
