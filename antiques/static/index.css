@@ -125,7 +125,10 @@ body{
     background-color: rgba(255, 243, 233, 0.8);    
     z-index: 3;
 }
-.img_info{
-    font-size: 20px;
+.img_info p{
+    font-size: 18px;
+    text-align: justify;
+    padding-right: 5px;
+    padding-left: 5px;
 
 }
