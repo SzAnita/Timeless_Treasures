@@ -8,6 +8,7 @@ from rest_framework.response import Response
 from .serializers import *
 from .models import *
 from .forms import *
+import re
 
 class AntiquesView(viewsets.ModelViewSet):
 
@@ -56,17 +57,38 @@ def login(request):
     return HttpResponse(template.render(context, request))
 
 def signup(request):
+    context = {
+        'form': Signup
+    }
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        pwd = request.POST.get('pwd')
+        fname = request.POST.get('fname')
+        lname = request.POST.get('lname')
+        valid = True
+        data = {
+            'email': email,
+            'pwd': pwd,
+            'fname': fname,
+            'lname': lname
+        }
+        if User.objects.filter(email=email).exists():
+            context['valid'] = 'no'
+            context['email'] = 'yes'
+            context['form'] = Signup(data)
+            valid = False
+        if not (re.search("[0-9]", pwd) and re.search("[A-Z]", pwd) and (re.search("[*!@#&%_.,$?+=-]", pwd) or re.search("-", pwd))):
+            context['valid'] = 'no'
+            context['pwd'] = 'yes'
+            context['form'] = Signup(data)
+        if valid:
+            user = User(email=email, pwd=pwd, first_name=fname, last_name=lname)
+            user.save()
+            request.session['email'] = email
+            return HttpResponseRedirect('index')
     template = loader.get_template('signup.html')
-    return HttpResponse(template.render({'form':Signup}, request))
+    return HttpResponse(template.render(context, request))
 
-def add_user(request):
-    email = request.POST.get('email')
-    pwd = request.POST.get('pwd')
-    fname = request.POST.get('fname')
-    lname = request.POST.get('lname')
-    user = User(email=email, pwd=pwd, first_name=fname, last_name=lname)
-    user.save()
 
-    request.session['email'] = email
-    return HttpResponseRedirect('index')
+
 

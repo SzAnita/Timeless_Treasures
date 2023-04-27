@@ -5,8 +5,8 @@ class User(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
     first_name = models.CharField(max_length=255, null=True)
     last_name = models.CharField(max_length=255, null=True)
-    email = models.EmailField(max_length=255, null=False)
-    username = models.CharField(max_length=20, null=True)
+    email = models.EmailField(max_length=255, null=False, unique=True)
+    username = models.CharField(max_length=20, null=True, unique=True)
     pwd = models.CharField(max_length=20, null=False)
 
 

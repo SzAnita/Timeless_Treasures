@@ -5,5 +5,4 @@ urlpatterns = [
     path('index', views.index, name='index'),
     path('login', views.login, name='login'),
     path('signup', views.signup, name='signup'),
-    path('add_user', views.add_user, name='add_user')
 ]
