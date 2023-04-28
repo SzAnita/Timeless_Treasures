@@ -27,7 +27,7 @@
                     <Text style="font-size: 12px">Password must contain at least 1 uppercase letter, 1 number, and any of the following: *!@#&%_.,$?+=-<br></Text>
                 {% endif %}
                 {% if field.name == 'pwd' and valid == 'no' and pwd == 'yes' %}
-                    <Text class="invalid">Please check again the given password.<br></Text>
+                    <Text class="invalid">Please give a valid password.<br></Text>
                 {% endif %}
             {% endfor %}
             <input type="submit" value="Submit"><br>
