@@ -11,7 +11,7 @@
         <h1>Timeless Treasures</h1>
         <div class="navbar">
           <div class="menu">
-            <div>Menu</div>
+            <div>menu</div>
           </div>
           <div class="sort">
             <div>search</div>
@@ -28,11 +28,19 @@
             <img src="{{x.link}}" alt="{{ x.name }}" />
             <div class="hover_div">
               <Text class="img_info">
-                  <p>{{ x.name }}</p>
-                  <p>Type: {{ x.type }}<br>Time of creation: {{ x.year }}<br>Creator: {{ x.creator }}<br>Description: {{ x.description }}</p>
-                  {% if x.valuation != None %}
-                      <p>Price valuation: {{ x.valuation }}</p>
-                  {%  endif %}
+                <div>
+                  <p style="font-size: 20px; text-align: center">
+                    <b><i>{{ x.name }}</i></b>
+                  </p>
+                  <p>
+                    <b>Type:</b> {{ x.type }}<br />
+                    <b>Time of creation:</b> {{ x.year }}<br />
+                    <b>Creator:</b> {{ x.creator }}<br />
+                    <b>Description:</b> {{ x.description }}
+                  </p>
+                  {% if x.valuation != None %} {% endif %}
+                </div>
+                <div class="heart">heart</div>
               </Text>
             </div>
           </div>
