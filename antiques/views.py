@@ -46,6 +46,7 @@ def login(request):
             template = loader.get_template('index.html')
             context = {
                 'antiques': Antiques.objects.all().values(),
+                'email': email
             }
             return HttpResponseRedirect(template.render(context, request))
         except User.DoesNotExist:
@@ -88,6 +89,28 @@ def signup(request):
             return HttpResponseRedirect('index')
     template = loader.get_template('signup.html')
     return HttpResponse(template.render(context, request))
+
+def search(request, kind):
+    context = {
+        'antiques':Antiques.objects.filter(type=kind)
+    }
+    template = loader.get_template('index.html')
+    return HttpResponse(template.render(context, request))
+
+def add_favorite(request, name):
+    print('test')
+    response = 'no'
+    if 'email' in request.session:
+        user_id = User.objects.get(email=request.session('email')).id
+        antique_id = Antiques.objects.get(name=name).id
+        fav = Favorites(user_id=user_id, antique_id=antique_id)
+        fav.save()
+        response = 'yes'
+        print('test user')
+    else:
+        print('test nonuser')
+    return HttpResponse(json.dumps(response))
+
 
 
 

@@ -15,4 +15,4 @@ class UserSerializer(serializers.ModelSerializer):
 class FavoritesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Favorites
-        fields = ('id', 'user_id', 'email', 'antique_id', 'type', 'year', 'description', 'link', 'valuation', 'fun_facts')
+        fields = ('id', 'user_id', 'antique_id')
