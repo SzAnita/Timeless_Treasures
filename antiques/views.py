@@ -10,18 +10,22 @@ from .models import *
 from .forms import *
 import re
 
+
 class AntiquesView(viewsets.ModelViewSet):
 
     queryset = Antiques.objects.all()
     serializer_class = AntiquesSerializer
 
+
 class UserView(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
+
 class FavoritesView(viewsets.ModelViewSet):
     serializer_class = FavoritesSerializer
     queryset = Favorites.objects.all()
+
 
 def index(request):
     context = {
@@ -57,6 +61,7 @@ def login(request):
             }
     return HttpResponse(template.render(context, request))
 
+
 def signup(request):
     context = {
         'form': Signup
@@ -90,6 +95,7 @@ def signup(request):
     template = loader.get_template('signup.html')
     return HttpResponse(template.render(context, request))
 
+
 def search(request, kind):
     context = {
         'antiques':Antiques.objects.filter(type=kind)
@@ -97,8 +103,8 @@ def search(request, kind):
     template = loader.get_template('index.html')
     return HttpResponse(template.render(context, request))
 
+
 def add_favorite(request, name):
-    print('test')
     response = 'no'
     if 'email' in request.session:
         user_id = User.objects.get(email=request.session('email')).id
@@ -106,9 +112,6 @@ def add_favorite(request, name):
         fav = Favorites(user_id=user_id, antique_id=antique_id)
         fav.save()
         response = 'yes'
-        print('test user')
-    else:
-        print('test nonuser')
     return HttpResponse(json.dumps(response))
 
 
