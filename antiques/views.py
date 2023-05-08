@@ -52,7 +52,7 @@ def login(request):
                 'antiques': Antiques.objects.all().values(),
                 'email': email
             }
-            return HttpResponseRedirect(template.render(context, request))
+            return HttpResponseRedirect('index')
         except User.DoesNotExist:
             template = loader.get_template('login.html')
             context = {
@@ -113,8 +113,3 @@ def add_favorite(request, name):
         fav.save()
         response = 'yes'
     return HttpResponse(json.dumps(response))
-
-
-
-
-
