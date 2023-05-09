@@ -145,3 +145,8 @@ body{
 .img_info p{
     font-size: 18px;
 }
+
+a > div.heart {
+    text-underline: none;
+    color: black;
+}
