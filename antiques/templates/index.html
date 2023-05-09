@@ -4,6 +4,8 @@
   <head>
     <meta charset="UTF-8" />
     <title>Timeless Treasures</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="{% static 'index.js' %}"></script>
   </head>
   <body>
     <div class="main_body">
@@ -17,7 +19,7 @@
             <div>search</div>
             <div>year</div>
             <div>type</div>
-              <div><a href="login" id="user">user</a></div>
+            <div>user</div>
           </div>
         </div>
       </div>
@@ -41,7 +43,7 @@
                   </p>
                   {% if x.valuation != None %} {% endif %}
                 </div>
-                  <a href="add_fav/{{ x.name }}"><div class="heart">heart</div></a>
+                  <div class="heart" onclick="add_fav('{{ x.name }}')">heart</div>
               </Text>
             </div>
           </div>

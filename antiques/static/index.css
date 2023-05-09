@@ -129,20 +129,17 @@ body{
 .img_info{
     display: flex;
     flex-direction: row;
-    background-color: aqua;
     width: 100%;
     height: 100%;
     overflow-y: auto;
 }
 .img_info .heart{
-    background-color: aqua;
     display: flex;
-    align-items: end;
-    justify-content: end;
+    position: absolute;
+    right: 0;
     background-image: url(./images/heart.png);
     width: 50px;
-    height: 50px;
-    bottom: 0;
+    height: 50px;  
 }
 
 .img_info p{
