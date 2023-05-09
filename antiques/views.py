@@ -45,8 +45,9 @@ def login(request):
         pwd = request.POST.get('pwd')
         try:
             user = User.objects.filter(email=email, pwd=pwd).get()
-            if 'email' not in request.session:
+            if 'email' not in request.session or request.session['email'] == "logout":
                 request.session['email'] = email
+                request.session.modified = True
             template = loader.get_template('index.html')
             context = {
                 'antiques': Antiques.objects.all().values(),
@@ -91,6 +92,7 @@ def signup(request):
             user = User(email=email, pwd=pwd, first_name=fname, last_name=lname)
             user.save()
             request.session['email'] = email
+            request.session.modified = True
             return HttpResponseRedirect('index')
     template = loader.get_template('signup.html')
     return HttpResponse(template.render(context, request))
@@ -106,10 +108,17 @@ def search(request, kind):
 
 def add_favorite(request, name):
     response = 'no'
-    if 'email' in request.session:
-        user_id = User.objects.get(email=request.session('email')).id
-        antique_id = Antiques.objects.get(name=name).id
+    if 'email' in request.session and request.session['email'] != "logout":
+        email = request.session.get('email')
+        user_id = User.objects.get(email=email)
+        antique_id = Antiques.objects.get(name=name)
         fav = Favorites(user_id=user_id, antique_id=antique_id)
         fav.save()
         response = 'yes'
     return HttpResponse(json.dumps(response))
+
+
+def logout(request):
+    request.session['email'] = "logout"
+    request.session.modified = True
+    return HttpResponseRedirect('index')
