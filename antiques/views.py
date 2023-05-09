@@ -107,18 +107,22 @@ def search(request, kind):
 
 
 def add_favorite(request, name):
-    response = 'no'
     if 'email' in request.session and request.session['email'] != "logout":
         email = request.session.get('email')
         user_id = User.objects.get(email=email)
         antique_id = Antiques.objects.get(name=name)
         fav = Favorites(user_id=user_id, antique_id=antique_id)
         fav.save()
-        response = 'yes'
-    return HttpResponse(json.dumps(response))
+        return HttpResponseRedirect('index')
+    else:
+        return HttpResponseRedirect('../login')
 
 
 def logout(request):
     request.session['email'] = "logout"
     request.session.modified = True
     return HttpResponseRedirect('index')
+
+
+
+
