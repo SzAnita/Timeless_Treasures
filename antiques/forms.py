@@ -9,7 +9,7 @@ class Login(forms.Form):
 
 
 class Signup(forms.Form):
-    email = forms.EmailField(required=True, widget=forms.TextInput(attrs={"placeholder": "Email"}))
-    pwd = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "Password"}), required=True, label='Password', min_length=8)
-    fname = forms.CharField(required=False, widget=forms.TextInput(attrs={"placeholder": "First Name(optional)"}))
-    lname = forms.CharField(required=False, widget=forms.TextInput(attrs={"placeholder": "Last Name(optional)"}))
+    email = forms.EmailField(required=True, widget=forms.TextInput(attrs={"placeholder": "Email*"}))
+    pwd = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "Password*"}), required=True, label='Password', min_length=8)
+    fname = forms.CharField(required=False, widget=forms.TextInput(attrs={"placeholder": "First Name"}))
+    lname = forms.CharField(required=False, widget=forms.TextInput(attrs={"placeholder": "Last Name"}))
