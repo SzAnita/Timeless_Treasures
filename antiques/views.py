@@ -76,16 +76,17 @@ def signup(request):
             'lname': lname
         }
         if User.objects.filter(email=email).exists():
-            context['valid'] = 'no'
+            context['v'] = 'no'
             context['email'] = 'yes'
             context['form'] = Signup(data)
             valid = False
         if not (re.search("[0-9]", pwd) and re.search("[A-Z]", pwd) and (re.search("[*!@#&%_.,$?+=-]", pwd) or re.search("-", pwd))):
-            context['valid'] = 'no'
-            context['pwd'] = 'yes'
+            context['v'] = 'no'
+            context['p'] = 'yes'
             context['form'] = Signup(data)
         if valid:
-            user = User(email=email, pwd=pwd, first_name=fname, last_name=lname)
+            user = User(email=email, pwd=pwd,
+                        first_name=fname, last_name=lname)
             user.save()
             request.session['email'] = email
             request.session.modified = True
@@ -138,7 +139,3 @@ def favorites(request):
     }
     template = loader.get_template('index.html')
     return HttpResponse(template.render(context, request))
-
-
-
-

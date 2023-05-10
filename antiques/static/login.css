@@ -57,6 +57,12 @@ form {
     height: 60%;
 }
 
+.form2{    
+    height: 100%;
+    transition: none;
+    margin: 0px 50px 0px 70px;
+}
+
 .inputholder{
     height: 100%;
     display: flex;
@@ -71,6 +77,22 @@ form {
     border-radius: 5px;
 }
 
+.inputholder2{
+    margin-top: 20px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    row-gap: 5px;
+}
+
+.inputholder2 input{
+    padding: 20px 20px;
+    outline: none;
+    border: none;
+    border-radius: 5px; 
+} 
+
 input[type="submit" i]{
     background-color:rgba(120,83,37,255);
     margin-top: 20px;
@@ -79,7 +101,6 @@ input[type="submit" i]{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    
 }
 
 a{
@@ -89,7 +110,6 @@ a{
 }
 
 form Text {
-
     font-size: 14px;
 }
 
@@ -101,4 +121,8 @@ form .invalid {
 form:hover{
     transform: scale(1.05);
     transform: translateY(-10%);
+}
+.form2:hover{
+    transform: none;
+    transform: none;
 }
