@@ -1,36 +1,39 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Sign up</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'login.css' %}">
-</head>
-<body>
-     <div class="main_body">
-      <a href="index"><div class="header">
-        <h1>Timeless Treasures</h1>
-      </div>
+    <link rel="stylesheet" type="text/css" href="{% static 'login.css' %}" />
+  </head>
+  <body>
+    <div class="main_body">
+      <a href="index"
+        ><div class="header">
+          <h1>Timeless Treasures</h1>
+        </div>
       </a>
       <div class="container">
         <form action="signup" method="post" onsubmit="check_pwd()">
-            {% csrf_token %}
-            {% for field in form %}
-                {{ field.label_tag }}<br>
-                {{ field }}<br>
-                {% if field.name == 'email'  and  valid == 'no' and email == 'yes' %}
-                    <Text class="invalid">There already exists an account for this email.You can log in <a href="login">here</a>.<br></Text>
-                {% endif %}
-                {% if field.name == 'pwd' %}
-                    <Text style="font-size: 12px">Password must contain at least 1 uppercase letter, 1 number, and any of the following: *!@#&%_.,$?+=-<br></Text>
-                {% endif %}
-                {% if field.name == 'pwd' and valid == 'no' and pwd == 'yes' %}
-                    <Text class="invalid">Please give a valid password.<br></Text>
-                {% endif %}
-            {% endfor %}
-            <input type="submit" value="Submit"><br>
+          {% csrf_token %} {% for field in form %} {{ field.label_tag }}<br />
+          {{ field }}<br />
+          {% if field.name == 'email' and valid == 'no' and email == 'yes' %}
+          <Text class="invalid"
+            >There already exists an account for this email.You can log in
+            <a href="login">here</a>.<br
+          /></Text>
+          {% endif %} {% if field.name == 'pwd' %}
+          <Text style="font-size: 12px"
+            >Password must contain at least 1 uppercase letter, 1 number, and
+            any of the following: *!@#&%_.,$?+=-<br
+          /></Text>
+          {% endif %} {% if field.name == 'pwd' and valid == 'no' and pwd ==
+          'yes' %}
+          <Text class="invalid">Please give a valid password.<br /></Text>
+          {% endif %} {% endfor %}
+          <input type="submit" value="Submit" /><br />
         </form>
       </div>
-     </div>
-</body>
+    </div>
+  </body>
 </html>
