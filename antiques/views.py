@@ -85,7 +85,8 @@ def signup(request):
             context['p'] = 'yes'
             context['form'] = Signup(data)
         if valid:
-            user = User(email=email, pwd=pwd, first_name=fname, last_name=lname)
+            user = User(email=email, pwd=pwd,
+                        first_name=fname, last_name=lname)
             user.save()
             request.session['email'] = email
             request.session.modified = True
@@ -109,7 +110,7 @@ def add_favorite(request, name):
         antique_id = Antiques.objects.get(name=name)
         fav = Favorites(user_id=user_id, antique_id=antique_id)
         fav.save()
-        return HttpResponseRedirect('../index')
+        return HttpResponseRedirect('index')
     else:
         return HttpResponseRedirect('../login')
 
@@ -138,7 +139,3 @@ def favorites(request):
     }
     template = loader.get_template('index.html')
     return HttpResponse(template.render(context, request))
-
-
-
-
