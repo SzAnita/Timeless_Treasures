@@ -29,7 +29,8 @@ class FavoritesView(viewsets.ModelViewSet):
 
 def index(request):
     context = {
-        'antiques': Antiques.objects.all().values()
+        'antiques': Antiques.objects.all().values(),
+        'heart': 'yes'
     }
     template = loader.get_template('index.html')
     return HttpResponse(template.render(context, request))
@@ -48,11 +49,6 @@ def login(request):
             if 'email' not in request.session or request.session['email'] == "logout":
                 request.session['email'] = email
                 request.session.modified = True
-            template = loader.get_template('index.html')
-            context = {
-                'antiques': Antiques.objects.all().values(),
-                'email': email
-            }
             return HttpResponseRedirect('index')
         except User.DoesNotExist:
             template = loader.get_template('login.html')
@@ -100,7 +96,7 @@ def signup(request):
 
 def search(request, kind):
     context = {
-        'antiques':Antiques.objects.filter(type=kind)
+        'antiques': Antiques.objects.filter(type=kind)
     }
     template = loader.get_template('index.html')
     return HttpResponse(template.render(context, request))
@@ -122,6 +118,26 @@ def logout(request):
     request.session['email'] = "logout"
     request.session.modified = True
     return HttpResponseRedirect('index')
+
+
+def check_user(request):
+    if 'email' in request.session and request.session['email'] != "logout":
+        return HttpResponseRedirect('favorite')
+    else:
+        return HttpResponseRedirect('login')
+
+
+def favorites(request):
+    user_id = User.objects.get(email=request.session['email'])
+    favorite = set()
+    for f in Favorites.objects.filter(user_id=user_id).select_related("antique_id"):
+        favorite.add(f.antique_id)
+    context = {
+        'antiques': favorite,
+        'heart': 'no'
+    }
+    template = loader.get_template('index.html')
+    return HttpResponse(template.render(context, request))
 
 
 
