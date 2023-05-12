@@ -15,9 +15,9 @@ class Antiques(models.Model):
     name = models.CharField(max_length=255)
     type = models.CharField(max_length=50)
     year = models.CharField(max_length=100)
-    description = models.CharField(max_length=255)
+    description = models.CharField(max_length=750)
     creator = models.CharField(max_length=150)
-    link = models.CharField(max_length=255)
+    link = models.CharField(max_length=300)
     valuation = models.CharField(max_length=255, null=True)
     fun_facts = models.CharField(max_length=255, null=True)
 
