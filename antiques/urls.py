@@ -9,5 +9,6 @@ urlpatterns = [
     path('add_fav/<str:name>', views.add_favorite),
     path('logout', views.logout),
     path('favorite', views.favorites),
-    path('check_user', views.check_user)
+    path('check_user', views.check_user),
+    path('user', views.user),
 ]

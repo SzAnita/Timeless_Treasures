@@ -139,6 +139,15 @@ def favorites(request):
     template = loader.get_template('index.html')
     return HttpResponse(template.render(context, request))
 
+def user(request):
+    #if 'email' in request.session and request.session['email'] != "logout":
+        #print("testif")
+        template = loader.get_template('user.html')
+        return HttpResponse(template.render)
+    #else:
+     #   print("testelse")
+      #  return HttpResponseRedirect('login')
+
 
 
 
