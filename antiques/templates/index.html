@@ -11,7 +11,19 @@
         <h1>Timeless Treasures</h1>
         <div class="navbar">
           <div class="menu">
-            <div>menu</div>
+            <div class="dropdown">menu
+                <ul class="dropdown">
+                    <div class="dropdown-content">
+                        <li><a href="Painting">Paintings</a></li>
+                        <li><a href="Statue">Statues</a></li>
+                        <li><a href="Building">Buildings</a></li>
+                        <li><a href="Book">Old books</a></li>
+                        <li><a href="Vehicle">Vehicles</a></li>
+                        <li><a href="Tool">Tools</a></li>
+                        <li><a href="Jewelry">Jewelry</a></li>
+                    </div>
+                </ul>
+            </div>
           </div>
           <div class="sort">
             <div>search</div>
@@ -22,32 +34,9 @@
         </div>
       </div>
       <div class="container">
-          {% for x in antiques %}
-          <div class="img_container">
-            <img src="{{x.link}}" alt="{{ x.name }}" />
-            <div class="hover_div">
-              <Text class="img_info">
-                <div>
-                  <p style="font-size: 20px; text-align: center; width: 80%">
-                    <b><i>{{ x.name }}</i></b>
-                  </p>
-                  <p>
-                    <b>Type:</b> {{ x.type }}<br />
-                    <b>Time of creation:</b> {{ x.year }}<br />
-                    <b>Creator:</b> {{ x.creator }}<br />
-                    <b>Description:</b> {{ x.description }}
-                  </p>
-                  {% if x.valuation != None %} {% endif %}
-                </div>
-                {% if heart == 'yes' %}
-                <a href="add_fav/{{ x.name }}" ><div class="heart"></div></a>
-                {% endif %}
-              </Text>
-            </div>
-          </div>
-          {% endfor %}
+          {% include 'antiques.html' %}
       </div>
     </div>
   </body>
-  <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'index.css' %}" />
 </html>

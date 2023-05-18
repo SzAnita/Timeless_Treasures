@@ -148,3 +148,22 @@ a{
 .img_info p{
     font-size: 18px;
 }
+
+.dropdown {
+	display: flex;
+}
+.dropdown ul {
+    list-style-type: none;
+}
+.dropdown-content {
+	display: none;
+	background-color: rgba(161, 127, 90, 0.8);
+	width: 150px;
+}
+
+.dropdown:hover .dropdown-content {
+	display: flex;
+	flex-direction: column;
+    margin-bottom: 10px;
+    z-index: 1;
+}
