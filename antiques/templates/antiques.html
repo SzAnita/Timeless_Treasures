@@ -1,28 +1,6 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Timeless Treasures</title>
-  </head>
-  <body>
-    <div class="main_body">
-      <div class="header">
-        <h1>Timeless Treasures</h1>
-        <div class="navbar">
-          <div class="menu">
-            <div>menu</div>
-          </div>
-          <div class="sort">
-            <div>search</div>
-            <div>year</div>
-            <div>type</div>
-            <a href="check_user"><div>user</div></a>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-          {% for x in antiques %}
+<div class="antiques">
+{% for x in antiques %}
           <div class="img_container">
             <img src="{{x.link}}" alt="{{ x.name }}" />
             <div class="hover_div">
@@ -36,8 +14,10 @@
                     <b>Time of creation:</b> {{ x.year }}<br />
                     <b>Creator:</b> {{ x.creator }}<br />
                     <b>Description:</b> {{ x.description }}
+                      {% if x.valuation != None %}
+
+                  {% endif %}
                   </p>
-                  {% if x.valuation != None %} {% endif %}
                 </div>
                 {% if heart == 'yes' %}
                 <a href="add_fav/{{ x.name }}" ><div class="heart"></div></a>
@@ -45,9 +25,6 @@
               </Text>
             </div>
           </div>
-          {% endfor %}
-      </div>
-    </div>
-  </body>
-  <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}" />
-</html>
+{% endfor %}
+</div>
+ <link rel="stylesheet" type="text/css" href="{% static 'antiques.css' %}" />

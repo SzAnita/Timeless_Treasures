@@ -94,7 +94,7 @@ def signup(request):
     return HttpResponse(template.render(context, request))
 
 
-def search(request, kind):
+def menu(request, kind):
     context = {
         'antiques': Antiques.objects.filter(type=kind)
     }
@@ -105,9 +105,9 @@ def search(request, kind):
 def add_favorite(request, name):
     if 'email' in request.session and request.session['email'] != "logout":
         email = request.session.get('email')
-        user_id = User.objects.get(email=email)
-        antique_id = Antiques.objects.get(name=name)
-        fav = Favorites(user_id=user_id, antique_id=antique_id)
+        user_ = User.objects.get(email=email)
+        antique = Antiques.objects.get(name=name)
+        fav = Favorites(user_id=user_, antique_id=antique)
         fav.save()
         return HttpResponseRedirect('../index')
     else:
@@ -122,29 +122,28 @@ def logout(request):
 
 def check_user(request):
     if 'email' in request.session and request.session['email'] != "logout":
-        return HttpResponseRedirect('favorite')
+        return HttpResponseRedirect('user')
     else:
         return HttpResponseRedirect('login')
 
 
-def favorites(request):
-    user_id = User.objects.get(email=request.session['email'])
-    favorite = set()
-    for f in Favorites.objects.filter(user_id=user_id).select_related("antique_id"):
-        favorite.add(f.antique_id)
-    context = {
-        'antiques': favorite,
-        'heart': 'no'
-    }
-    template = loader.get_template('index.html')
-    return HttpResponse(template.render(context, request))
-
 def user(request):
-    # if 'email' in request.session and request.session['email'] != "logout":
+    if 'email' in request.session and request.session['email'] != "logout":
+        user_id = User.objects.get(email=request.session['email'])
+        favorite = set()
+        for f in Favorites.objects.filter(user_id=user_id).select_related("antique_id"):
+            favorite.add(f.antique_id)
+        context = {
+            'antiques': favorite,
+            'heart': 'no',
+            'email': request.session['email']
+        }
+        template = loader.get_template('user.html')
+        return HttpResponse(template.render(context, request))
+    else:
+        #return HttpResponseRedirect('login')
         template = loader.get_template('user.html')
         return HttpResponse(template.render())
-    # else:
-    #  return HttpResponseRedirect('login')
 
 
 
