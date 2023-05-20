@@ -1,10 +1,6 @@
-import json
-from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
-from django.urls import reverse
 from rest_framework import viewsets
-from rest_framework.response import Response
 from .serializers import *
 from .models import *
 from .forms import *
@@ -94,9 +90,9 @@ def signup(request):
     return HttpResponse(template.render(context, request))
 
 
-def menu(request, kind):
+def menu(request, kind_):
     context = {
-        'antiques': Antiques.objects.filter(type=kind)
+        'antiques': Antiques.objects.filter(type=kind_)
     }
     template = loader.get_template('index.html')
     return HttpResponse(template.render(context, request))
@@ -144,6 +140,20 @@ def user(request):
         #return HttpResponseRedirect('login')
         template = loader.get_template('user.html')
         return HttpResponse(template.render())
+
+
+def kind(request):
+    if request.method == 'POST':
+        kind_ = request.POST.getlist("type[]")
+        antiques = []
+        for k in kind_:
+            for a in Antiques.objects.filter(type=k):
+                antiques.append(a)
+        context = {
+            'antiques':antiques
+        }
+        template = loader.get_template('index.html')
+        return HttpResponse(template.render(context, request))
 
 
 
