@@ -8,7 +8,6 @@ import re
 
 
 class AntiquesView(viewsets.ModelViewSet):
-
     queryset = Antiques.objects.all()
     serializer_class = AntiquesSerializer
 
@@ -24,9 +23,18 @@ class FavoritesView(viewsets.ModelViewSet):
 
 
 def index(request):
+    r = [x for x in range(9, 19)]
+    r2 = []
+    for r1 in r:
+        dict_ = {
+            'century':r1,
+            'years': [x for x in range(r1 * 100, r1 * 100 + 100)]
+        }
+        r2.append(dict_)
     context = {
         'antiques': Antiques.objects.all().values(),
-        'heart': 'yes'
+        'heart': 'yes',
+        'range': r2,
     }
     template = loader.get_template('index.html')
     return HttpResponse(template.render(context, request))
@@ -41,7 +49,7 @@ def login(request):
         email = request.POST.get('email')
         pwd = request.POST.get('pwd')
         try:
-            user = User.objects.filter(email=email, pwd=pwd).get()
+            User.objects.filter(email=email, pwd=pwd).get()
             if 'email' not in request.session or request.session['email'] == "logout":
                 request.session['email'] = email
                 request.session.modified = True
@@ -81,8 +89,8 @@ def signup(request):
             context['p'] = 'yes'
             context['form'] = Signup(data)
         if valid:
-            user = User(email=email, pwd=pwd, first_name=fname, last_name=lname)
-            user.save()
+            user_ = User(email=email, pwd=pwd, first_name=fname, last_name=lname)
+            user_.save()
             request.session['email'] = email
             request.session.modified = True
             return HttpResponseRedirect('index')
@@ -137,28 +145,47 @@ def user(request):
         template = loader.get_template('user.html')
         return HttpResponse(template.render(context, request))
     else:
-        #return HttpResponseRedirect('login')
+        # return HttpResponseRedirect('login')
         template = loader.get_template('user.html')
         return HttpResponse(template.render())
 
 
-def kind(request):
-    if request.method == 'POST':
-        kind_ = request.POST.getlist("type[]")
+def filter_(request):
+    r = [x for x in range(9, 19)]
+    r2 = []
+    for r1 in r:
+        dict_ = {
+            'century': r1,
+            'years': [x for x in range(r1 * 100, r1 * 100 + 100)]
+        }
+        r2.append(dict_)
+    if request.GET.getlist('year[]'):
+        dates = request.GET.getlist('year[]')
+        antiques = []
+        uncertain = []
+        for d in dates:
+            for a in Antiques.objects.filter(year__contains=d):
+                antiques.append(a)
+            if int(d) >= 1000:
+                century = str(int(d[:2]) + 1) + 'th century'
+            else:
+                century = str(int(d[:1]) + 1) + 'th century'
+            for a in Antiques.objects.filter(year__contains=century):
+                if a not in antiques and a not in uncertain:
+                    uncertain.append(a)
+        context = {
+            'antiques': antiques,
+            'uncertain': uncertain
+        }
+    else:
+        kind_ = request.GET.getlist("type[]")
         antiques = []
         for k in kind_:
             for a in Antiques.objects.filter(type=k):
                 antiques.append(a)
         context = {
-            'antiques':antiques
+            'antiques': antiques
         }
-        template = loader.get_template('index.html')
-        return HttpResponse(template.render(context, request))
-
-
-
-
-
-
-
-
+    context['range'] = r2
+    template = loader.get_template('index.html')
+    return HttpResponse(template.render(context, request))

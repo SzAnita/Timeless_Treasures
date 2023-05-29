@@ -9,6 +9,6 @@ urlpatterns = [
     path('logout', views.logout),
     path('check_user', views.check_user),
     path('user', views.user),
-    path('type', views.kind),
+    path('filter', views.filter_),
     path('<str:kind_>', views.menu),
 ]

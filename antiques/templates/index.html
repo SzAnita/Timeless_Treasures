@@ -28,21 +28,28 @@
           <div class="sort">
             <div>search</div>
             <div class="dropdown">year
-                <form>
-
-                </form>
+              <form action="filter" method="GET" class="dropdown-content">
+                  {% for i in range %}
+                      <optgroup label="{{ i.century }}th century">
+                      {% for x in i.years %}
+                          <option><label><input type="checkbox" name="year[]" id="{{ x }}" value="{{ x }}">{{ x }}<br></label></option>
+                      {% endfor %}
+                      </optgroup>
+                  {% endfor %}
+                  <input type="submit" name="submit" value="Submit">
+              </form>
             </div>
             <div class="dropdown">type
-                <form action="type" method="POST" class="dropdown-content">
-              {% csrf_token %}
-              <input type="checkbox" name="type[]" id="Painting" value="Painting">Paintings<br>
-              <input type="checkbox" name="type[]" id="Statue" value="Statue">Statues<br>
-              <input type="checkbox" name="type[]" id="Building" value="Building">Buildings<br>
-              <input type="checkbox" name="type[]" id="Book" value="Book">Old books<br>
-              <input type="checkbox" name="type[]" id="Vehicle" value="Vehicle">Vehicles<br>
-              <input type="checkbox" name="type[]" id="Tool" value="Jewelry">Jewelry<br>
-              <input type="submit" name="submit" value="Submit">
-          </form>
+              <form action="filter" method="GET" class="dropdown-content">
+                    <label><input type="checkbox" name="type[]" id="Painting" value="Painting">Paintings<br></label>
+                    <label><input type="checkbox" name="type[]" id="Statue" value="Statue">Statues<br></label>
+                    <label><input type="checkbox" name="type[]" id="Building" value="Building">Buildings<br></label>
+                    <label><input type="checkbox" name="type[]" id="Book" value="Book">Old books<br></label>
+                    <label><input type="checkbox" name="type[]" id="Vehicle" value="Vehicle">Vehicles<br></label>
+                    <label><input type="checkbox" name="type[]" id="Jewelry" value="Jewelry">Jewelry<br></label>
+                    <label><input type="checkbox" name="type[]" id="Tool" value="Tool">Tools<br></label>
+                  <input type="submit" name="submit" value="Submit">
+              </form>
             </div>
             <a href="check_user"><div>user</div></a>
           </div>
@@ -50,6 +57,13 @@
       </div>
       <div class="container">
           {% include 'antiques.html' %}
+
+          {% if uncertain %}
+              <p>These antiques don't have an exact date, but they are from the same century(es) as the years you have selected</p>
+              {% with uncertain as antiques %}
+              {% include 'antiques.html' %}
+              {% endwith %}
+          {% endif %}
       </div>
     </div>
   </body>

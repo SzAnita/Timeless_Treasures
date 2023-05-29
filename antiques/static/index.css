@@ -111,14 +111,14 @@ a{
     height: 280px;
     margin-top: 20px;
     z-index: 1;
-    position: relative; 
+    position: relative;
 }
-.hover_div{ 
-  display: none;    
+.hover_div{
+  display: none;
 }
 
 .img_container:hover .hover_div{
-    display: block; 
+    display: block;
     position:absolute;
     top:0;
     left:0;
