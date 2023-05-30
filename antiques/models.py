@@ -21,6 +21,7 @@ class Antiques(models.Model):
     valuation = models.CharField(max_length=255, null=True)
     fun_facts = models.CharField(max_length=255, null=True)
 
+
 class Favorites(models.Model):
     id = models.IntegerField(primary_key=True, unique=True)
     user_id = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)

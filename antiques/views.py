@@ -22,19 +22,23 @@ class FavoritesView(viewsets.ModelViewSet):
     queryset = Favorites.objects.all()
 
 
-def index(request):
+def create_range():
     r = [x for x in range(9, 19)]
     r2 = []
     for r1 in r:
         dict_ = {
-            'century':r1,
+            'century': r1,
             'years': [x for x in range(r1 * 100, r1 * 100 + 100)]
         }
         r2.append(dict_)
+    return r2
+
+
+def index(request):
     context = {
         'antiques': Antiques.objects.all().values(),
         'heart': 'yes',
-        'range': r2,
+        'range': create_range(),
     }
     template = loader.get_template('index.html')
     return HttpResponse(template.render(context, request))
@@ -84,7 +88,8 @@ def signup(request):
             context['email'] = 'yes'
             context['form'] = Signup(data)
             valid = False
-        if not (re.search("[0-9]", pwd) and re.search("[A-Z]", pwd) and (re.search("[*!@#&%_.,$?+=-]", pwd) or re.search("-", pwd))):
+        if not (re.search("[0-9]", pwd) and re.search("[A-Z]", pwd) and (
+                re.search("[*!@#&%_.,$?+=-]", pwd) or re.search("-", pwd))):
             context['v'] = 'no'
             context['p'] = 'yes'
             context['form'] = Signup(data)
@@ -151,14 +156,6 @@ def user(request):
 
 
 def filter_(request):
-    r = [x for x in range(9, 19)]
-    r2 = []
-    for r1 in r:
-        dict_ = {
-            'century': r1,
-            'years': [x for x in range(r1 * 100, r1 * 100 + 100)]
-        }
-        r2.append(dict_)
     if request.GET.getlist('year[]'):
         dates = request.GET.getlist('year[]')
         antiques = []
@@ -177,7 +174,7 @@ def filter_(request):
             'antiques': antiques,
             'uncertain': uncertain
         }
-    else:
+    elif request.GET.getlist("type[]"):
         kind_ = request.GET.getlist("type[]")
         antiques = []
         for k in kind_:
@@ -186,6 +183,26 @@ def filter_(request):
         context = {
             'antiques': antiques
         }
-    context['range'] = r2
+    elif request.GET['search']:
+        print('test_search')
+        value = request.GET['search']
+
+        context = {
+            'antiques': Antiques.objects.filter(name__icontains=value) | Antiques.objects.filter(
+                description__icontains=value) | Antiques.objects.filter(creator__icontains=value),
+        }
+    context['range'] = create_range()
+    template = loader.get_template('index.html')
+    return HttpResponse(template.render(context, request))
+
+
+def search(request):
+    print('test search')
+    value = request.GET['search']
+    context = {
+        'antiques': Antiques.objects.filter(name__contains=value) | Antiques.objects.filter(
+            description__contains=value) | Antiques.objects.filter(creator__contains=value),
+        'range': create_range()
+    }
     template = loader.get_template('index.html')
     return HttpResponse(template.render(context, request))

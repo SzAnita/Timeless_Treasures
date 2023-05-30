@@ -11,4 +11,5 @@ urlpatterns = [
     path('user', views.user),
     path('filter', views.filter_),
     path('<str:kind_>', views.menu),
+    path('search', views.search)
 ]

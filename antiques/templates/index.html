@@ -26,7 +26,12 @@
             </div>
           </div>
           <div class="sort">
-            <div>search</div>
+            <div>
+                <form action="filter" method="GET">
+                    <input type="text" placeholder="Search..." name="search">
+                    <button type="submit"><img src="{% static 'images/search.jpg' %}" class="search-icon"></button>
+                </form>
+            </div>
             <div class="dropdown">year
               <form action="filter" method="GET" class="dropdown-content">
                   {% for i in range %}
