@@ -22,9 +22,13 @@
                 {% if heart == 'yes' %}
                 <a href="add_fav/{{ x.name }}" ><div class="heart"></div></a>
                 {% endif %}
+                  <div class="collection" onclick="display_form('{{ x.name }}')" ></div>
+                <div class="coll" id="{{ x.name }}"></div>
               </Text>
             </div>
           </div>
 {% endfor %}
 </div>
  <link rel="stylesheet" type="text/css" href="{% static 'antiques.css' %}" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script src="{% static 'index.js' %}"></script>

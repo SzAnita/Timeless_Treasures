@@ -28,3 +28,14 @@ class Favorites(models.Model):
     antique_id = models.ForeignKey('Antiques', on_delete=models.SET_NULL, null=True)
 
 
+class Collections(models.Model):
+    id = models.IntegerField(primary_key=True, unique=True)
+    user_id = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
+    name = models.CharField(max_length=100)
+
+
+class AntiquesCollections(models.Model):
+    id = models.IntegerField(primary_key=True, unique=True)
+    user_id = models.ForeignKey('User', on_delete=models.SET_NULL, null=True)
+    antique_id = models.ForeignKey('Antiques', on_delete=models.SET_NULL, null=True)
+    collection_id = models.ForeignKey('Collections', on_delete=models.SET_NULL, null=True)

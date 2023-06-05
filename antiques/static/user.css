@@ -64,3 +64,32 @@ button {
     font-size: 20px;
     border-radius :10px;
 }
+
+.collections{
+    font-size: 25px;
+    padding-top: 10px;
+    padding-left: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.collections:visited {
+    color: inherit;
+}
+
+.header{
+    width: 70%;
+    left: 30%;
+    height: 20%;
+    position: absolute;
+    top: 0;
+    background-image: url('./images/header_image.jpg');
+    background-size:auto;
+    background-repeat:unset;
+    text-align: center;
+}
+
+.header a {
+    text-decoration: none;
+    color: black;
+}

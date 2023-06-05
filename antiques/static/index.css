@@ -78,19 +78,10 @@ a{
 
 }
 
-
 .container{
     background-color: rgba(255, 243, 233, 1);
     width: 100%;
     height: auto;
-}
-
-.container img {
-    max-width:100%;
-    max-height:100%;
-    object-fit: cover;
-    z-index: 1;
-    flex:1;
 }
 
 .container .antiques {
@@ -104,49 +95,6 @@ a{
     justify-items: flex-start;
 }
 
-.img_container{
-    display: flex;
-    justify-content: center;
-    width: 300px;
-    height: 280px;
-    margin-top: 20px;
-    z-index: 1;
-    position: relative;
-}
-.hover_div{
-  display: none;
-}
-
-.img_container:hover .hover_div{
-    display: block;
-    position:absolute;
-    top:0;
-    left:0;
-    width: 300px;
-    height: 280px;
-    background-color: rgba(255, 243, 233, 0.8);    
-    z-index: 3;
-    flex-wrap: wrap;
-}
-.img_info{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-}
-.img_info .heart{
-    display: flex;
-    position: absolute;
-    right: 0;
-    background-image: url(./images/heart.png);
-    width: 50px;
-    height: 50px;  
-}
-
-.img_info p{
-    font-size: 18px;
-}
 
 .dropdown {
 	display: flex;

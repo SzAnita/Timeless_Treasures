@@ -4,7 +4,7 @@ from rest_framework import viewsets
 from .serializers import *
 from .models import *
 from .forms import *
-import re
+import re, json
 
 
 class AntiquesView(viewsets.ModelViewSet):
@@ -20,6 +20,16 @@ class UserView(viewsets.ModelViewSet):
 class FavoritesView(viewsets.ModelViewSet):
     serializer_class = FavoritesSerializer
     queryset = Favorites.objects.all()
+
+
+class CollectionsView(viewsets.ModelViewSet):
+    serializer_class = CollectionsSerializer
+    queryset = Collections.objects.all()
+
+
+class AntiquesCollectionsView(viewsets.ModelViewSet):
+    serializer_class = AntiquesCollectionsSerializer
+    queryset = AntiquesCollections.objects.all()
 
 
 def create_range():
@@ -116,6 +126,7 @@ def add_favorite(request, name):
         email = request.session.get('email')
         user_ = User.objects.get(email=email)
         antique = Antiques.objects.get(name=name)
+
         fav = Favorites(user_id=user_, antique_id=antique)
         fav.save()
         return HttpResponseRedirect('../index')
@@ -136,16 +147,28 @@ def check_user(request):
         return HttpResponseRedirect('login')
 
 
-def user(request):
+def user(request, collection_='favorites'):
+    print(collection_)
     if 'email' in request.session and request.session['email'] != "logout":
         user_id = User.objects.get(email=request.session['email'])
-        favorite = set()
-        for f in Favorites.objects.filter(user_id=user_id).select_related("antique_id"):
-            favorite.add(f.antique_id)
+        antiques = set()
+        userpage = 'yes'
+        if collection_ == 'favorites':
+            for f in Favorites.objects.filter(user_id=user_id).select_related("antique_id"):
+                antiques.add(f.antique_id)
+        else:
+            userpage = 'no'
+            for c in AntiquesCollections.objects.filter(user_id=user_id, collection_id=Collections.objects.get(name=collection_)).select_related('antique_id'):
+                antiques.add(c.antique_id)
+        collections = set()
+        for c in Collections.objects.filter(user_id=user_id):
+            collections.add(c.name)
         context = {
-            'antiques': favorite,
+            'antiques': antiques,
             'heart': 'no',
-            'email': request.session['email']
+            'email': request.session['email'],
+            'collections': collections,
+            'user': userpage
         }
         template = loader.get_template('user.html')
         return HttpResponse(template.render(context, request))
@@ -184,7 +207,6 @@ def filter_(request):
             'antiques': antiques
         }
     elif request.GET['search']:
-        print('test_search')
         value = request.GET['search']
 
         context = {
@@ -196,13 +218,30 @@ def filter_(request):
     return HttpResponse(template.render(context, request))
 
 
-def search(request):
-    print('test search')
-    value = request.GET['search']
-    context = {
-        'antiques': Antiques.objects.filter(name__contains=value) | Antiques.objects.filter(
-            description__contains=value) | Antiques.objects.filter(creator__contains=value),
-        'range': create_range()
-    }
-    template = loader.get_template('index.html')
-    return HttpResponse(template.render(context, request))
+def add_to_collection(request, antique):
+    user_ = User.objects.get(email=request.session['email'])
+    coll = AntiquesCollections(user_id=user_, antique_id=Antiques.objects.get(name=antique),
+                               collection_id=Collections.objects.get(name=request.GET['coll']))
+    coll.save()
+    return HttpResponseRedirect('../index')
+
+
+def get_coll(request):
+    if 'email' in request.session and request.session['email'] != 'logout':
+        user_ = User.objects.get(email=request.session['email'])
+        response = [request.GET['antique']]
+        collections = []
+        for c in Collections.objects.filter(user_id=user_).values_list('name'):
+            print(c)
+            collections.append(c)
+        response.append(collections)
+        return HttpResponse(json.dumps(response))
+    else:
+        return HttpResponseRedirect('login')
+
+
+def update_coll(request):
+    user_ = User.objects.get(email=request.session['email'])
+    coll = Collections(user_id=user_, name=request.GET['name'])
+    coll.save()
+    return HttpResponse('done')

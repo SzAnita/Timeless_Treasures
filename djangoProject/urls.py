@@ -22,6 +22,8 @@ router = routers.DefaultRouter()
 router.register(r'antiques', views.AntiquesView)
 router.register(r'users', views.UserView)
 router.register(r'favorites', views.FavoritesView)
+router.register(r'collections', views.CollectionsView)
+router.register(r'antique_collections', views.AntiquesCollectionsView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

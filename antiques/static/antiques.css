@@ -43,7 +43,7 @@
 .img_info{
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: 80%;
     height: 100%;
     overflow-y: auto;
 }
@@ -58,4 +58,30 @@
 
 .img_info p{
     font-size: 18px;
+}
+
+.img_info .collection {
+    display: flex;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.oBLbdoPqE-GVs9bTKShMEwHaHa%26pid%3DApi&f=1&ipt=b1909fa7819fbcf2f5327156381cd1209789f3519be80a54980ae091de14308c&ipo=images");
+    width: 50px;
+    height: 50px;
+}
+
+
+.new_coll {
+    text-decoration: none;
+    color: darkblue;
+}
+
+.add_coll {
+    font-size: 18px;
+    position: absolute;
+    top: 100px;
+    right: -90px;
+    width: 150px;
+    color: black;
+    float: right;
 }
