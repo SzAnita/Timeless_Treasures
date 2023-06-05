@@ -175,7 +175,10 @@ def user(request, collection_='favorites'):
     else:
         # return HttpResponseRedirect('login')
         template = loader.get_template('user.html')
-        return HttpResponse(template.render())
+        context = {
+            'user': 'yes'
+        }
+        return HttpResponse(template.render(context, request))
 
 
 def filter_(request):
