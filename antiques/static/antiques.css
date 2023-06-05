@@ -62,12 +62,15 @@
 
 .img_info .collection {
     display: flex;
+}
+
+.img_info .collection img{
+    width: 50px;
+    height: 50px;
     position: absolute;
     top: 50px;
     right: 0;
-    background-image: url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.oBLbdoPqE-GVs9bTKShMEwHaHa%26pid%3DApi&f=1&ipt=b1909fa7819fbcf2f5327156381cd1209789f3519be80a54980ae091de14308c&ipo=images");
-    width: 50px;
-    height: 50px;
+    z-index: 3;
 }
 
 

@@ -22,7 +22,7 @@
                 {% if heart == 'yes' %}
                 <a href="add_fav/{{ x.name }}" ><div class="heart"></div></a>
                 {% endif %}
-                  <div class="collection" onclick="display_form('{{ x.name }}')" ></div>
+                  <div class="collection" onclick="display_form('{{ x.name }}')" ><img src="{% static 'images/plus.jpg' %} " class="collection"></div>
                 <div class="coll" id="{{ x.name }}"></div>
               </Text>
             </div>
