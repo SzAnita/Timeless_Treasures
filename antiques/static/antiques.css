@@ -27,6 +27,7 @@
 }
 .hover_div{
   display: none;
+  overflow: hidden;
 }
 
 .img_container:hover .hover_div{
@@ -39,6 +40,8 @@
     background-color: rgba(255, 243, 233, 0.8);
     z-index: 3;
     flex-wrap: wrap;
+  overflow: hidden;
+
 }
 .img_info{
     display: flex;

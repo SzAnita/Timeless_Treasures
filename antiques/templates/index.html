@@ -11,56 +11,104 @@
         <h1>Timeless Treasures</h1>
         <div class="navbar">
           <div class="menu">
-            <div class="dropdown">menu
-                <ul class="dropdown">
-                    <div class="dropdown-content">
-                        <li><a href="Painting">Paintings</a></li>
-                        <li><a href="Statue">Statues</a></li>
-                        <li><a href="Building">Buildings</a></li>
-                        <li><a href="Book">Old books</a></li>
-                        <li><a href="Vehicle">Vehicles</a></li>
-                        <li><a href="Tool">Tools</a></li>
-                        <li><a href="Jewelry">Jewelry</a></li>
-                    </div>
-                </ul>
+            <div class="dropdown">
+              menu
+              <ul class="dropdown">
+                <div class="dropdown-content">
+                  <li><a href="Painting">Paintings</a></li>
+                  <li><a href="Statue">Statues</a></li>
+                  <li><a href="Building">Buildings</a></li>
+                  <li><a href="Book">Old books</a></li>
+                  <li><a href="Vehicle">Vehicles</a></li>
+                  <li><a href="Tool">Tools</a></li>
+                  <li><a href="Jewelry">Jewelry</a></li>
+                </div>
+              </ul>
             </div>
           </div>
           <div class="sort">
             <div>
-                <form action="search" method="GET">
-                    <input type="text" placeholder="Search..." name="search">
-                    <button type="submit"><img src="{% static 'images/search.jpg' %}" class="search-icon"></button>
-                </form>
-            </div>
-            <div class="dropdown">year
-              <form action="filter" method="GET" class="dropdown-content">
-                  {% for i in range %}
-                          <option><label><input type="checkbox" name="year[]" id="{{ i }}" value="{{ i }}">{{ i }}th century<br></label></option>
-
-                  {% endfor %}
-                  <input type="submit" name="submit" value="Submit">
+              <form action="search" method="GET">
+                <input type="text" placeholder="Search..." name="search" />
+                <button type="submit">
+                  <img
+                    src="{% static 'images/search.jpg' %}"
+                    class="search-icon"
+                  />
+                </button>
               </form>
             </div>
-            <div class="dropdown">type
+            <div class="dropdown">
+              year
               <form action="filter" method="GET" class="dropdown-content">
-                    <label><input type="checkbox" name="type[]" id="Painting" value="Painting">Paintings<br></label>
-                    <label><input type="checkbox" name="type[]" id="Statue" value="Statue">Statues<br></label>
-                    <label><input type="checkbox" name="type[]" id="Building" value="Building">Buildings<br></label>
-                    <label><input type="checkbox" name="type[]" id="Book" value="Book">Old books<br></label>
+                {% for i in range %}
+                <label
+                  ><input
+                    type="checkbox"
+                    name="year[]"
+                    id="{{ i }}"
+                    value="{{ i }}" />{{ i }}th century<br
+                /></label>
 
-                    <label><input type="checkbox" name="type[]" id="Jewelry" value="Jewelry">Jewelry<br></label>
-                    <label><input type="checkbox" name="type[]" id="Tool" value="Tool">Tools<br></label>
-                  <input type="submit" name="submit" value="Submit">
+                {% endfor %}
+                <input type="submit" name="submit" value="Submit" />
+              </form>
+            </div>
+            <div class="dropdown">
+              type
+              <form action="filter" method="GET" class="dropdown-content">
+                <label
+                  ><input
+                    type="checkbox"
+                    name="type[]"
+                    id="Painting"
+                    value="Painting" />Paintings<br
+                /></label>
+                <label
+                  ><input
+                    type="checkbox"
+                    name="type[]"
+                    id="Statue"
+                    value="Statue" />Statues<br
+                /></label>
+                <label
+                  ><input
+                    type="checkbox"
+                    name="type[]"
+                    id="Building"
+                    value="Building" />Buildings<br
+                /></label>
+                <label
+                  ><input
+                    type="checkbox"
+                    name="type[]"
+                    id="Book"
+                    value="Book" />Old books<br
+                /></label>
+
+                <label
+                  ><input
+                    type="checkbox"
+                    name="type[]"
+                    id="Jewelry"
+                    value="Jewelry" />Jewelry<br
+                /></label>
+                <label
+                  ><input
+                    type="checkbox"
+                    name="type[]"
+                    id="Tool"
+                    value="Tool" />Tools<br
+                /></label>
+                <input type="submit" name="submit" value="Submit" />
               </form>
             </div>
             <a href="check_user"><div>user</div></a>
           </div>
         </div>
       </div>
-      <div class="container">
-          {% include 'antiques.html' %}
-      </div>
+      <div class="container">{% include 'antiques.html' %}</div>
     </div>
   </body>
-<link rel="stylesheet" type="text/css" href="{% static 'index.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}" />
 </html>

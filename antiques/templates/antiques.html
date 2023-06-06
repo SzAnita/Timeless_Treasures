@@ -1,34 +1,34 @@
 {% load static %}
 <div class="antiques">
-{% for x in antiques %}
-          <div class="img_container">
-            <img src="{{x.link}}" alt="{{ x.name }}" />
-            <div class="hover_div">
-              <Text class="img_info">
-                <div>
-                  <p style="font-size: 20px; text-align: center; width: 80%">
-                    <b><i>{{ x.name }}</i></b>
-                  </p>
-                  <p>
-                    <b>Type:</b> {{ x.type }}<br />
-                    <b>Time of creation:</b> {{ x.year }}<br />
-                    <b>Creator:</b> {{ x.creator }}<br />
-                    <b>Description:</b> {{ x.description }}
-                      {% if x.valuation != None %}
-
-                  {% endif %}
-                  </p>
-                </div>
-                {% if heart == 'yes' %}
-                <a href="add_fav/{{ x.name }}" ><div class="heart"></div></a>
-                {% endif %}
-                  <div class="collection" onclick="display_form('{{ x.name }}')" ><img src="{% static 'images/plus.jpg' %} " class="collection"></div>
-                <div class="coll" id="{{ x.name }}"></div>
-              </Text>
-            </div>
-          </div>
-{% endfor %}
+  {% for x in antiques %}
+  <div class="img_container">
+    <img src="{{x.link}}" alt="{{ x.name }}" />
+    <div class="hover_div">
+      <Text class="img_info">
+        <div>
+          <p style="font-size: 20px; text-align: center; width: 80%">
+            <b><i>{{ x.name }}</i></b>
+          </p>
+          <p>
+            <b>Type:</b> {{ x.type }}<br />
+            <b>Time of creation:</b> {{ x.year }}<br />
+            <b>Creator:</b> {{ x.creator }}<br />
+            <b>Description:</b> {{ x.description }} {% if x.valuation != None %}
+            {% endif %}
+          </p>
+        </div>
+        {% if heart == 'yes' %}
+        <a href="add_fav/{{ x.name }}"><div class="heart"></div></a>
+        {% endif %}
+        <div class="collection" onclick="display_form('{{ x.name }}')">
+          <img src="{% static 'images/plus.png' %} " class="collection" />
+        </div>
+        <div class="coll" id="{{ x.name }}"></div>
+      </Text>
+    </div>
+  </div>
+  {% endfor %}
 </div>
- <link rel="stylesheet" type="text/css" href="{% static 'antiques.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'antiques.css' %}" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script src="{% static 'index.js' %}"></script>
