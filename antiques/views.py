@@ -1,10 +1,10 @@
+import json
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from rest_framework import viewsets
-from .serializers import *
-from .models import *
 from .forms import *
-import re, json
+from .models import *
+from .serializers import *
 
 
 class AntiquesView(viewsets.ModelViewSet):
@@ -34,14 +34,7 @@ class AntiquesCollectionsView(viewsets.ModelViewSet):
 
 def create_range():
     r = [x for x in range(9, 19)]
-    r2 = []
-    for r1 in r:
-        dict_ = {
-            'century': r1,
-            'years': [x for x in range(r1 * 100, r1 * 100 + 100)]
-        }
-        r2.append(dict_)
-    return r2
+    return r
 
 
 def index(request):
@@ -187,18 +180,10 @@ def filter_(request):
         antiques = []
         uncertain = []
         for d in dates:
-            for a in Antiques.objects.filter(year__contains=d):
+            for a in Antiques.objects.filter(year__contains=d+'th century') | Antiques.objects.filter(year__startswith=str(int(d)-1)):
                 antiques.append(a)
-            if int(d) >= 1000:
-                century = str(int(d[:2]) + 1) + 'th century'
-            else:
-                century = str(int(d[:1]) + 1) + 'th century'
-            for a in Antiques.objects.filter(year__contains=century):
-                if a not in antiques and a not in uncertain:
-                    uncertain.append(a)
         context = {
-            'antiques': antiques,
-            'uncertain': uncertain
+            'antiques': antiques
         }
     elif request.GET.getlist("type[]"):
         kind_ = request.GET.getlist("type[]")

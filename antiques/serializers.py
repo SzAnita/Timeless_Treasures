@@ -5,7 +5,7 @@ from .models import *
 class AntiquesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Antiques
-        fields = ('id', 'name', 'type', 'year', 'description', 'creator', 'link', 'valuation', 'fun_facts')
+        fields = ('id', 'name', 'type', 'year', 'description', 'creator', 'link', 'valuation')
 
 
 class UserSerializer(serializers.ModelSerializer):
