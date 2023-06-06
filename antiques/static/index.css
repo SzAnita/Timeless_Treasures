@@ -95,30 +95,31 @@ a{
     justify-items: flex-start;
 }
 
-
-.dropdown {
-	display: flex;
+.dropdown{
+    position: relative;
+    display: inline-block;
 }
+
 .dropdown ul {
     list-style-type: none;
 }
+
 .dropdown-content {
 	display: none;
 	background-color: rgba(161, 127, 90, 0.8);
-	width: 200px;
-    height: 200px;
-}
-.menu .dropdown-content {
+    height: 185px;
+    width: 160px;
     position: absolute;
-    left: -135px;
-    width: 150px;
+    top: 100%;
+    left: 0;
+    transform: translateY(-120%);
+    text-align: justify;
 }
 
 .dropdown:hover .dropdown-content {
-	display: flex;
-	flex-direction: column;
-    margin-bottom: 75px;
+	display: block;
     overflow-y: auto;
+
 }
 
 .dropdown:hover .dropdown-content input[type=submit]{

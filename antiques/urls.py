@@ -7,6 +7,7 @@ urlpatterns = [
     path('signup', views.signup),
     path('add_fav/<str:name>', views.add_favorite),
     path('logout', views.logout, name='logout'),
+    path('search', views.filter_),
     path('user/<str:collection_>', views.user),
     path('check_user', views.check_user),
     path('update_coll', views.update_coll),
@@ -15,5 +16,4 @@ urlpatterns = [
     path('user', views.user),
     path('filter', views.filter_),
     path('<str:kind_>', views.menu),
-    path('search', views.filter_),
 ]

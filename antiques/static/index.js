@@ -7,7 +7,10 @@
             },
             success: function (result) {
                 let data = JSON.parse(result);
-                let name = data[0]
+                if(data == 'login') {
+                    $(location).prop('href', 'login')
+                }
+                let name = data[0];
                 let form = $("<form></form>");
                 form.attr({
                     'action':'add_collection/'+name,

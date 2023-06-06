@@ -196,7 +196,6 @@ def filter_(request):
         }
     elif request.GET['search']:
         value = request.GET['search']
-
         context = {
             'antiques': Antiques.objects.filter(name__icontains=value) | Antiques.objects.filter(
                 description__icontains=value) | Antiques.objects.filter(creator__icontains=value),
@@ -225,7 +224,7 @@ def get_coll(request):
         response.append(collections)
         return HttpResponse(json.dumps(response))
     else:
-        return HttpResponseRedirect('login')
+        return HttpResponse(json.dumps('login'))
 
 
 def update_coll(request):
