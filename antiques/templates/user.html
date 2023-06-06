@@ -17,26 +17,27 @@
             <div class="email">Email: {{ email }}</div>
             <div class="phone">Phone Number:</div>
             <div class="last_name">Last Name:</div>
-              <a href="logout"><button>Log out</button></a>
+            <a href="logout" class="logout"><button>Log out</button></a>
           </div>
-        {% if user == 'yes' %}
-            <a href="user" class="collections">Favorites</a>
-            {% for c in collections %}
-                <a href="user/{{ c }}" class="collections">{{ c }}</a>
-            {% endfor %}
-        {% else %}
-            <a href="../user" class="collections">Favorites</a>
-            {% for c in collections %}
-                <a href="../{{ c }}" class="collections">{{ c }}</a>
-            {% endfor %}
-        {% endif %}
+          {% if user == 'yes' %}
+          <a href="user" class="collections">Favorites</a>
+          {% for c in collections %}
+          <a href="user/{{ c }}" class="collections">{{ c }}</a>
+          {% endfor %} {% else %}
+          <a href="../user" class="collections">Favorites</a>
+          {% for c in collections %}
+          <a href="../{{ c }}" class="collections">{{ c }}</a>
+          {% endfor %} {% endif %}
         </div>
-      {% if user == 'yes' %}
-          <div class="header"><a href="index"><h1>Timeless Treasures</h1></a></div>
-      {% else %}
-        <div class="header"><a href="../index"><h1>Timeless Treasures</h1></a></div>
-      {% endif %}
-          {% include 'antiques.html' %}
+        {% if user == 'yes' %}
+        <div class="header">
+          <a href="index"><h1>Timeless Treasures</h1></a>
+        </div>
+        {% else %}
+        <div class="header">
+          <a href="../index"><h1>Timeless Treasures</h1></a>
+        </div>
+        {% endif %} {% include 'antiques.html' %}
       </div>
     </div>
   </body>
