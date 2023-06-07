@@ -141,7 +141,6 @@ def check_user(request):
 
 
 def user(request, collection_='favorites'):
-    print(collection_)
     if 'email' in request.session and request.session['email'] != "logout":
         user_id = User.objects.get(email=request.session['email'])
         antiques = set()
@@ -161,7 +160,8 @@ def user(request, collection_='favorites'):
             'heart': 'no',
             'email': request.session['email'],
             'collections': collections,
-            'user': userpage
+            'user': userpage,
+            'username': User.objects.get(email=request.session['email']).username
         }
         template = loader.get_template('user.html')
         return HttpResponse(template.render(context, request))
@@ -178,7 +178,6 @@ def filter_(request):
     if request.GET.getlist('year[]'):
         dates = request.GET.getlist('year[]')
         antiques = []
-        uncertain = []
         for d in dates:
             for a in Antiques.objects.filter(year__contains=d+'th century') | Antiques.objects.filter(year__startswith=str(int(d)-1)):
                 antiques.append(a)
@@ -220,7 +219,6 @@ def get_coll(request):
         response = [request.GET['antique']]
         collections = []
         for c in Collections.objects.filter(user_id=user_).values_list('name'):
-            print(c)
             collections.append(c)
         response.append(collections)
         return HttpResponse(json.dumps(response))

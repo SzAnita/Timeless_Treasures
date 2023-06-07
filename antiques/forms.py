@@ -13,3 +13,4 @@ class Signup(forms.Form):
     pwd = forms.CharField(widget=forms.PasswordInput(attrs={"placeholder": "Password*"}), required=True, label='Password', min_length=8)
     fname = forms.CharField(required=False, widget=forms.TextInput(attrs={"placeholder": "First Name"}))
     lname = forms.CharField(required=False, widget=forms.TextInput(attrs={"placeholder": "Last Name"}))
+    username = forms.CharField(required=False, widget=forms.TextInput(attrs={"placeholder": "Username"}))

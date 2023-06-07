@@ -11,7 +11,7 @@
         <div class="user_info">
           <div class="user_header">
             <div class="user_image"></div>
-            <Text class="text">Username</Text>
+            <Text class="text">{% if username != null %}{{ username }}{% endif %}</Text>
           </div>
           <div class="details">
             <div class="email">Email: {{ email }}</div>
